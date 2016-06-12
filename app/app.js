@@ -25,6 +25,7 @@ class App extends React.Component {
               total={'0:40'}
             />
             <Footer />
+            <AppContainer />
           </div>
 
         );

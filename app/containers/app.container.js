@@ -27,7 +27,7 @@ class AppContainer extends React.Component {
     let _this = this;
 
     // Request for a playlist via Soundcloud using a client ID
-    Axios.get(`https://api.soundcloud.com/playlists/209262931?client_id=${this.client_id}`)
+    Axios.get(`https://api.soundcloud.com/playlists/233123437?client_id=${this.client_id}`)
       .then(function (response) {
         const trackLength = response.data.tracks.length;
         const randomNumber = Math.floor((Math.random() * trackLength) + 1);
