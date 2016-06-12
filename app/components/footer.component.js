@@ -4,7 +4,7 @@ class Footer extends React.Component {
   render() {
     return(
       <div className="footer">
-        <p>Deps from
+        <p>Music Unleashed
           &nbsp;
           <img src="public/img/spaceship.jpg" className="logo" />
           &nbsp;
