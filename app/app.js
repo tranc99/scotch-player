@@ -2,22 +2,26 @@
 // Import React and ReactDOM
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Search from './components/search.component';
+import Details from './components/details.component';
+import Player from './components/player.component';
 // Search component created as a class
-class Search extends React.Component {
+class App extends React.Component {
 
     // render method is most important
     // render method returns JSX template
     render() {
         return (
-          <form>
-            <input type = "text" />
-            <input type = "submit" />
-          </form>
+          <div>
+            <Search />
+            <Details title={'Track title'} />
+          </div>
+
         );
     }
 }
 
 // Render to ID content in the DOM
-ReactDOM.render( < Search / > ,
+ReactDOM.render( <App /> ,
     document.getElementById('content')
 );
