@@ -3,6 +3,7 @@ import Axios from 'axios';
 import Sound from 'react-sound';
 import Search from '../components/search.component';
 import Details from '../components/details.component';
+import Player from '../components/player.component';
 
 class AppContainer extends React.Component {
 
@@ -11,7 +12,7 @@ class AppContainer extends React.Component {
     this.client_id = 'b8428bbfb1a5d926fdd92fbb6e45f480';
 
     this.state = {
-      track: stream_url: '', title: '', artwork_url: '',
+      track: {stream_url: '', title: '', artwork_url: ''},
       playStatus: Sound.status.STOPPED,
       elapsed: '00:00',
       total: '00:00',
@@ -87,6 +88,26 @@ class AppContainer extends React.Component {
       })
   }
 
+  togglePlay() {
+    if(this.state.playStatus === Sound.status.PLAYING) {
+      this.setState({playStatus: Sound.status.PAUSED});
+    } else {
+      this.setState({playStatus: Sound.status.PLAYING});
+    }
+  }
+
+  stop() {
+    this.setState({playStatus: Sound.status.STOPPED});
+  }
+
+  forward() {
+    this.setState({playFromPosition: this.state.playFromPosition+=1000*10});
+  }
+
+  backward() {
+    this.setState({playFromPosition: this.state.playFromPosition-=1000*10});
+  }
+
   render() {
     return (
       <div className="scotch_music">
@@ -99,6 +120,14 @@ class AppContainer extends React.Component {
         />
         <Details
           title={this.state.track.title}
+        />
+        <Player
+          togglePlay={this.togglePlay.bind(this)}
+          stop={this.stop.bind(this)}
+          playStatus={this.state.playStatus}
+          forward={this.forward.bind(this)}
+          backward={this.backward.bind(this)}
+          random={this.randomTrack.bind(this)}
         />
         <Sound
           url={this.prepareUrl(this.state.track.stream_url)}
@@ -113,4 +142,4 @@ class AppContainer extends React.Component {
   }
 }
 
-default export AppContainer
+export default AppContainer

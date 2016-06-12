@@ -7,6 +7,7 @@ import Details from './components/details.component';
 import Player from './components/player.component';
 import Progress from './components/progress.component';
 import Footer from './components/footer.component';
+import AppContainer from './containers/app.container';
 // Search component created as a class
 class App extends React.Component {
 
