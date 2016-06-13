@@ -4,6 +4,8 @@ import Sound from 'react-sound';
 import Search from '../components/search.component';
 import Details from '../components/details.component';
 import Player from '../components/player.component';
+import Progress from '../components/progress.component';
+import Footer from '../components/footer.component';
 
 class AppContainer extends React.Component {
 
@@ -27,7 +29,7 @@ class AppContainer extends React.Component {
     let _this = this;
 
     // Request for a playlist via Soundcloud using a client ID
-    Axios.get(`https://api.soundcloud.com/playlists/233123437?client_id=${this.client_id}`)
+    Axios.get(`https://api.soundcloud.com/playlists/233123443?client_id=${this.client_id}`)
       .then(function (response) {
         const trackLength = response.data.tracks.length;
         const randomNumber = Math.floor((Math.random() * trackLength) + 1);
@@ -108,9 +110,23 @@ class AppContainer extends React.Component {
     this.setState({playFromPosition: this.state.playFromPosition-=1000*10});
   }
 
+  xlArtwork(url) {
+    return url.replace(/large/, 't500x500');
+  }
+
   render() {
+
+    const scotchStyle = {
+      width: '500px',
+      height: '500px',
+      backgroundImage: `linear-gradient(
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.7)
+      ), url(${this.xlArtwork(this.state.track.artwork_url)})`
+    }
+
     return (
-      <div className="scotch_music">
+      <div className="scotch_music" style={scotchStyle}>
         <Search
           autoCompleteValue={this.state.autoCompleteValue}
           tracks={this.state.tracks}
@@ -129,6 +145,10 @@ class AppContainer extends React.Component {
           backward={this.backward.bind(this)}
           random={this.randomTrack.bind(this)}
         />
+        <Progress
+          elapsed={this.state.elapsed}
+          total={this.state.total}
+          position={this.state.position}/>
         <Sound
           url={this.prepareUrl(this.state.track.stream_url)}
           playStatus={this.state.playStatus}
@@ -136,6 +156,7 @@ class AppContainer extends React.Component {
           playFromPosition={this.state.playFromPosition}
           onFinishedPlaying={this.handleSongFinished.bind(this)}
         />
+        <Footer />
 
       </div>
     );

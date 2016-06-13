@@ -15,18 +15,7 @@ class App extends React.Component {
     // render method returns JSX template
     render() {
         return (
-          <div>
-            <Search />
-            <Details title={'Track title'} />
-            <Player />
-            <Progress
-              position={'0.3'}
-              elapsed={'00:00'}
-              total={'0:40'}
-            />
-            <Footer />
             <AppContainer />
-          </div>
 
         );
     }
